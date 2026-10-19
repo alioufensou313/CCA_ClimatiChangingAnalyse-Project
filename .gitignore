@@ -1,4 +1,13 @@
-__pycache__/
+#=========================================
+#Ignore Python’s temporary internal files.
+#=========================================
+__pycache__/  
 *.pyc
-.venv/
-.streamlit/
+#===========================================
+#Ignore my local virtual environment folder.
+#===========================================
+.venv/        
+#======================================================
+#Ignore my personal dashboard settings and secret keys.
+#======================================================
+.streamlit/    
