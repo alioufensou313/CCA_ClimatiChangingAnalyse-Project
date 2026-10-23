@@ -8,6 +8,33 @@ __pycache__/
 #===========================================
 .venv/        
 #======================================================
-#Ignore my personal dashboard settings and secret keys.
-#======================================================
-.streamlit/    
+   
+#===========================
+# Open-Meteo API cache
+.cache/
+#===========================
+
+#===========================
+# Streamlit secrets
+.streamlit/secrets.toml
+#===========================
+
+#===========================
+# Environment variables
+.env
+#===========================
+
+#===========================
+# Jupyter checkpoints
+.ipynb_checkpoints/
+#===========================
+
+#===========================
+# Operating system files
+.DS_Store
+Thumbs.db
+#===========================
+
+# Open-Meteo generated cache
+.cache.sqlite
+

@@ -1,0 +1,35 @@
+On a coché les variables + les pays ..etc
+1/ on veut installer requests pandas / python -m pip install requests pandas
+2/ça n'a pas marché pour des raisons donc : py -m pip install requests pandas
+3/ le shell n'accepte pas pip donc => python -m pip install requests requests-cache retry-requests numpy pandas openmeteo-requests
+
+
+Maintenant que vos outils sont prêts, nous allons écrire le code pour transformer la réponse de l'API (qui arrive sous forme de dictionnaire JSON) en un tableau propre avec des lignes et des colonnes : un DataFrame Pandas.
+Ouvrez votre fichier test_api.py dans VS Code, effacez tout ce qu'il y a dedans, et collez ce code à la place.
+
+On a importer les biblioteques :
+
+import openmeteo_requests : permet de communiquer avec l'API Open-Meteo.
+import pandas as pd  : permet de manipuler les données sous forme de tableaux.
+import requests_cache : conserve les réponses pour éviter de les télécharger plusieurs fois.
+from retry_requests import retry : permet de réessayer une requête en cas d'erreur temporaire.
+
+et le plan maintenant est comme suit :
+On doit etablir la connexion avec l'api (milan, un seul parametre, une duree courte => to test first!)
+
+
+j'ai reduis les parametres puis chngé hourly par daily car hourly consomme plus de data !! et je veux le minimum maintenant ! 
+
+ 
+
+fichier requirements doit contenir (requests
+requests
+pandas
+numpy
+requests-cache
+retry-requests
+openmeteo-requests 
+
+
+
+https://www.amazon.it/-/en/YAMAMOTO-Nutrition-L-Carnitine-Carnitine-Supplement/dp/B074P5XJFK/ref=zg_bs_g_6102393031_d_sccl_1/524-6178429-5174662?psc=1
