@@ -12,7 +12,7 @@ openmeteo = openmeteo_requests.Client(session = retry_session)
 
 
 # Make sure all required weather variables are listed here
-# The order of variables in hourly or daily is important to assign them correctly below
+
 url = "https://archive-api.open-meteo.com/v1/archive"
 params = {
 	"latitude": 42.7824,
