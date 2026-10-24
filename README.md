@@ -53,3 +53,8 @@ python test_api.py
 ## Project Status
 
 Work in progress — initial test completed moving to collecting larger portion of data.
+
+## Weather variables
+- Mean temperature (°C)
+- Mean apparent temperature (°C)
+- Mean relative humidity (%)
