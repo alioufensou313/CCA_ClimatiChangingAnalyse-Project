@@ -42,3 +42,4 @@ Progress — Weather Variables
 - Updated the API request and DataFrame structure.
 
 **Next step:** Process all three locations using a Python loop and combine their data into a single DataFrame.
+

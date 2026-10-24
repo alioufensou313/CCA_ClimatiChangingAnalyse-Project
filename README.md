@@ -58,3 +58,41 @@ Work in progress — initial test completed moving to collecting larger portion 
 - Mean temperature (°C)
 - Mean apparent temperature (°C)
 - Mean relative humidity (%)
+
+## Locations
+
+The initial API request includes three geographical locations:
+
+Milan, Italy
+
+Tunis, Tunisia
+
+A location in France (coordinates: 46°N, 2°E)
+
+Current Testing Period
+
+### The first working dataset covers January 1–7, 2020.
+
+This short period is used to verify that the API connection, data retrieval, and DataFrame construction work correctly before expanding the analysis.
+### Planned Analysis
+
+We will calculate the difference between apparent temperature and actual temperature, investigate its relationship with relative humidity, and compare results across seasons, years, and cities.
+
+The historical analysis will help us examine whether these relationships have remained stable or changed over time.
+
+# How to Run
+
+Install the required packages:
+
+python -m pip install -r requirements.txt
+
+Run the initial API script:
+
+python test_api.py
+
+# Project Status
+
+In development — API integration and initial data exploration completed.
+
+This project is developed incrementally, with changes documented through Git and GitHub.
+
