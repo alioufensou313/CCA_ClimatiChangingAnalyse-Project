@@ -20,7 +20,11 @@ params = {
     "longitude": [9.1900, 10.1658, 2],
     "start_date": "2020-01-01",
     "end_date": "2020-01-07",
-    "daily": "temperature_2m_mean",
+    "daily":  [
+    "temperature_2m_mean",
+    "apparent_temperature_mean",
+    "relative_humidity_2m_mean"
+],
     "timezone": "auto"
 }
 
@@ -28,8 +32,6 @@ responses = openmeteo.weather_api(url, params=params)
 
 print("Number of responses:", len(responses))
 print("API request completed!")
-print("Number of responses:", len(responses))
-
 # Process first location. Add a for-loop for multiple locations or weather models
 response = responses[0]
 print(f"Coordinates: {response.Latitude()}°N {response.Longitude()}°E")
@@ -42,6 +44,8 @@ print(f"Timezone difference to GMT+0: {response.UtcOffsetSeconds()}s")
 daily = response.Daily()
 
 daily_temperature = daily.Variables(0).ValuesAsNumpy()
+daily_apparent = daily.Variables(1).ValuesAsNumpy()
+daily_humidity = daily.Variables(2).ValuesAsNumpy()
 
 daily_data = {
     "date": pd.date_range(
@@ -53,6 +57,8 @@ daily_data = {
 }
 
 daily_data["temperature_mean"] = daily_temperature
+daily_data["apparent_temperature"] = daily_apparent
+daily_data["relative_humidity"] = daily_humidity
 
 daily_dataframe = pd.DataFrame(data=daily_data)
 

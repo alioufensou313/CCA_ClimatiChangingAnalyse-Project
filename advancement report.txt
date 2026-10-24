@@ -33,3 +33,12 @@ openmeteo-requests
 
 
 https://www.amazon.it/-/en/YAMAMOTO-Nutrition-L-Carnitine-Carnitine-Supplement/dp/B074P5XJFK/ref=zg_bs_g_6102393031_d_sccl_1/524-6178429-5174662?psc=1
+
+
+Progress — Weather Variables
+
+- Added apparent temperature and relative humidity to the weather analysis.
+- Extended the dataset to study the relationship between actual temperature, apparent temperature, and humidity.
+- Updated the API request and DataFrame structure.
+
+**Next step:** Process all three locations using a Python loop and combine their data into a single DataFrame.
