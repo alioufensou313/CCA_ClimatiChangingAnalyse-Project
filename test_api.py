@@ -14,16 +14,21 @@ openmeteo = openmeteo_requests.Client(session = retry_session)
 # Make sure all required weather variables are listed here
 
 url = "https://archive-api.open-meteo.com/v1/archive"
-params = {
-	"latitude": 42.7824,
-	"longitude": 12.5984,
-	"start_date": "2020-01-01",
-	"end_date": "2020-01-07",
-	"daily": "temperature_2m_mean",
-	"timezone": "auto",
-}
-responses = openmeteo.weather_api(url, params = params)  
 
+params = {
+    "latitude": [45.4642, 36.819, 46],
+    "longitude": [9.1900, 10.1658, 2],
+    "start_date": "2020-01-01",
+    "end_date": "2020-01-07",
+    "daily": "temperature_2m_mean",
+    "timezone": "auto"
+}
+
+responses = openmeteo.weather_api(url, params=params)
+
+print("Number of responses:", len(responses))
+print("API request completed!")
+print("Number of responses:", len(responses))
 
 # Process first location. Add a for-loop for multiple locations or weather models
 response = responses[0]
