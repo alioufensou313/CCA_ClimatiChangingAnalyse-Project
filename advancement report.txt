@@ -41,5 +41,130 @@ Progress — Weather Variables
 - Extended the dataset to study the relationship between actual temperature, apparent temperature, and humidity.
 - Updated the API request and DataFrame structure.
 
-**Next step:** Process all three locations using a Python loop and combine their data into a single DataFrame.
+*maintenant je veux ajouter d'autres variables pour que l'analalyse soit pertinante : 
+j'ajoute la vitesse direction du vent et la pression du surface pour faire une veritable analyse dynamique du climat!! 
 
+apres ça je pense à ajouter plus de pays : je vais les regrouper par zones pour ne pas élargir le tas des données en vide !! je ne veux pas créer une= jeu debile qui compare des pays random et interprete 
+je vais alors filtrer ces pays puis je vais les extracter puis je vais faire la moyenne de leurs temperatures pour avoir une temperature moyenne de cette zone predifine du contienant par exp !! puis j'utilise cette teperature moyenne poour faire une comparaison avec le vent par exp 
+et sa direction !! mais nonn des que j'aurai la temperature moyenne d'une zone predefinie il faut trouver une variable à relier avec !!
+
+on va definier nos relations de variables avent tout !! donc on a :
+## latitude + longitude = fixent le cadre géographique et la quantité d'energie solaire reçue 
+(la latitude determine votre zone climatique!!
+
+##Pression de surface = est le moteur du climat !!
+les differneces de pression entre les deux régions créent le vent
+L'air touhours se déplace des hautes pressions/anticyclones vers les basses pressions/dépressions)
+
+## Humidité + température moyenne = ensemble determinent la temperature apparente (le ressenti thermique 
+crucial pour mesurer l'impact réel du changement climatique sur le vivant)
+
+les variables à ajouter absolument sont : 
+##### I need to use what we've learned in class 
+=> (join ,class, str, )
+
+
+# Weather Report Project — Progress Update
+
+## How i started
+
+At the beginning, I was just trying to understand how to use the Open-Meteo Historical Weather API with Python. I didn't have much experience working with APIs or processing weather data, so I started with a simple test using three locations: Milan, Tunis, and a general location in France.
+
+My first goal was to check whether I could connect to the API, request weather data, and turn the results into something I could work with using Pandas.
+
+I managed to retrieve seven days of data and create my first DataFrame. This helped me understand the difference between requesting data from an API and actually organizing it for analysis.
+
+## Changing the project idea
+
+After the first tests, I realized that comparing only three locations was quite limited. I wanted to study climate change in different environments, not just compare a few cities.
+
+I came across the Köppen–Geiger climate classification and decided to use it to organize the locations in the project.
+
+The classification divides climates into five major groups:
+
+- A — Tropical
+- B — Arid
+- C — Temperate
+- D — Continental
+- E — Polar
+
+Instead of choosing locations randomly, I decided to select two locations from each group. This gave me ten locations in total.
+
+The final selection was:
+
+| Group | First location | Second location |
+|---|---|---|
+| A | Kisangani | Darwin |
+| B | Aswan | Ulaanbaatar |
+| C | Tunis | Milan |
+| D | Moscow | Yellowknife |
+| E | Longyearbyen | South Pole |
+
+The idea is to compare how temperatures have changed in different climates over forty years, from 1986 to 2025. I also want to compare the two locations within each climate group.
+
+The South Pole is a research location rather than a town, and I will need to be careful when interpreting its modeled weather data.
+
+## Building the Python code
+
+At first, I entered the latitude and longitude values directly into the API parameters. This worked for three locations, but it wasn't practical for ten.
+
+I changed the structure by creating a list of dictionaries. Each dictionary contains a location's name, latitude, longitude and climate group.
+
+I then used a Python loop to extract the coordinates automatically and request the weather data.
+
+Another important step was learning how to use `for`, `zip()`, `append()` and `pd.concat()` to process the API responses and combine the results into one DataFrame.
+
+## Choosing the weather variables
+
+I started with three variables: mean temperature, apparent temperature and relative humidity.
+
+Later, I decided to expand the analysis to six daily variables:
+
+1. Mean temperature
+2. Maximum temperature
+3. Minimum temperature
+4. Apparent temperature
+5. Relative humidity
+6. Sunshine duration
+
+I wanted to keep apparent temperature because I am interested in the difference between actual air temperature and how hot or cold conditions feel in different environments.
+
+I also added two calculated columns: sunshine duration converted into hours, and the difference between apparent and actual mean temperature.
+
+I decided to use daily rather than hourly observations because daily data is sufficient for the main research questions and is easier to manage over forty years.
+
+## Problems I encountered
+
+The first problems were related to Python and the structure of my code. I had some syntax errors, including misplaced brackets and braces. I also made mistakes when changing the API parameters.
+
+At one point, I was requesting only three variables from Open-Meteo while trying to read six variables in Python. This caused an error. I learned that the order and number of variables requested from the API must match the variables processed in the DataFrame.
+
+I also had to correct the way dates were represented. Some daily dates appeared as the previous day because of the difference between local time and UTC.
+
+After these corrections, the seven-day test worked successfully for all ten locations.
+
+The result was a DataFrame with 70 rows and 11 columns. The checks showed no missing values or duplicate city-date combinations, and every climate group contained exactly two locations.
+
+## Expanding to forty years
+
+Once the short test worked, I changed the dates to cover January 1986 through December 2025.
+
+The first problem was that Open-Meteo rejected the request because I was asking for too much data at once: ten locations, six variables and forty years.
+
+To solve this, I divided the forty-year period into eight five-year batches for each location. This meant making 80 smaller API requests instead of one large request.
+
+The smaller requests worked, but I then encountered API rate limits. First, I received a message saying that the minute limit had been exceeded.
+
+I added `time.sleep(10)` to leave a ten-second delay between requests. This helped slow down the download process, but it didn't prevent the hourly limit from being reached.
+
+During the latest run, the program processed the requests for the first eight locations and reached the first period for Longyearbyen before stopping.
+
+## Current problem and next steps
+
+The main problem now is that the code keeps the downloaded batches in memory and only combines them at the end. If the program crashes because of an API limit, I risk losing the progress from that execution.
+
+My next step is to improve the download process so that each completed batch is saved separately. This will allow the program to skip already downloaded batches when I restart it.
+
+After collecting the complete dataset, I plan to check missing values, verify the dates, clean the data and start analyzing annual temperature trends.
+
+The main objective is still to understand how temperatures have evolved across different climate environments over forty years, rather than just producing graphs without a clear research question.

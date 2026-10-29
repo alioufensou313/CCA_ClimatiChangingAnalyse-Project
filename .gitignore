@@ -37,4 +37,25 @@ Thumbs.db
 
 # Open-Meteo generated cache
 .cache.sqlite
-
+###########################
+weather_1986_2025.csv
+#============================
+#API cache
+.cache.*
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+#============================
+# Streamlit local configuration
+.streamlit/secrets.toml
+#============================
+# Generated weather datasets
+weather_1986_2025.csv
+data/raw/
+data/processed/
+#============================
+# Editor and operating system
+.vscode/
+.DS_Store
+Thumbs.db
+#============================
