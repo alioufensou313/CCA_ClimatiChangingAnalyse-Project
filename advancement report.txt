@@ -168,3 +168,28 @@ My next step is to improve the download process so that each completed batch is 
 After collecting the complete dataset, I plan to check missing values, verify the dates, clean the data and start analyzing annual temperature trends.
 
 The main objective is still to understand how temperatures have evolved across different climate environments over forty years, rather than just producing graphs without a clear research question.
+
+
+## November 2026 — Historical dataset successfully collected
+
+After several attempts, I finally managed to download the complete forty-year dataset.
+
+The main difficulty was the Open-Meteo API request limits. At first, I tried downloading the data for all ten locations and forty years in one request, but it was too large.
+
+I then divided the period into eight five-year batches per location, making 80 requests in total. This solved the request-size problem, but I encountered another issue: the API limited how many requests I could make per minute and per hour.
+
+I added a ten-second delay between requests and tried again. Some executions still stopped because of the hourly limit, but eventually the complete download worked.
+
+I combined all the batches into one Pandas DataFrame and saved it as a CSV file.
+
+The final dataset contains 146,100 daily observations, covering January 1, 1986 to December 31, 2025, for all ten selected locations.
+
+I also checked the structure of the dataset. Each location has 14,610 rows, there are no missing values, and there are no duplicate combinations of city and date.
+
+The CSV has 11 columns, including the six weather measurements, location information and two additional calculated variables: sunshine hours and the difference between apparent and actual temperature.
+
+I noticed that Excel initially displayed the CSV values together in one column because of the separator settings. This was a display/import issue rather than a problem with the Python data.
+
+My next step is to create a separate Python file for data exploration. I want to keep the API download code separate from the analysis code so that I don't need to download the dataset again whenever I want to test something.
+
+For now, I plan to check the values, understand their distributions and calculate descriptive statistics before moving on to graphs and long-term climate comparisons.

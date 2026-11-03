@@ -59,3 +59,10 @@ data/processed/
 .DS_Store
 Thumbs.db
 #============================
+#============================
+#Historical weather datasets
+weather_1986_2025.csv
+weather 1986-2025.csv
+data/raw/
+data/processed/
+#============================

@@ -5,7 +5,12 @@ import requests_cache
 from retry_requests import retry
 
 
-# 1. SET UP THE OPEN-METEO API CLIENT
+
+start_time = time.perf_counter()
+
+
+
+#1. SET UP THE OPEN-METEO API CLIENT
 
 cache_session = requests_cache.CachedSession(
     ".cache", expire_after=-1
@@ -179,3 +184,8 @@ print(
 daily_dataframe.to_csv("weather_1986_2025.csv", index=False)
 
 print("Dataset saved successfully!")
+
+#To print the time of processing
+elapsed = time.perf_counter() - start_time
+
+print(f"Execution time: {elapsed / 60:.2f} minutes")

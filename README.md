@@ -70,6 +70,26 @@ I then expanded the requested period to 1986–2025. The full request was too la
 
 The current challenge is handling the API's hourly request limit and making downloads resumable. The complete forty-year dataset has not yet been finalized.
 
+4.Current progress — November 2026
+The data collection stage is now complete!
+After successfully testing the API with seven days of data for ten locations, I expanded the period to 1986–2025. My first attempt failed because the API couldn't handle the whole request at once.
+I solved this by dividing the data into five-year periods for each location, giving me 80 smaller requests. I also encountered minute and hourly API limits, so I added delays between requests.
+After several attempts, I managed to download and combine the complete dataset.
+
+***Final dataset***
+
+10 locations across the five major Köppen–Geiger climate groups
+
+40 years of daily weather data (1986–2025)
+
+146,100 observations and 11 columns
+
+6 weather variables and 2 calculated variables
+
+No missing values or duplicate city-date combinations in the initial checks
+
+The dataset is saved locally as a CSV file.
+
 ### Next steps
 
 1. Save each successful download batch and skip completed batches when restarting.
@@ -77,6 +97,30 @@ The current challenge is handling the API's hourly request limit and making down
 3. Check data quality and missing observations.
 4. Analyze annual temperature trends and apparent temperature differences.
 5. Compare the selected locations and create visualizations.
+
+Current stage: Data exploration and validation
+
+Now that the data has been collected, I'm moving on to understanding it before creating graphs.
+
+I plan to check whether the temperature, humidity and sunshine measurements are reasonable, examine the distributions, and identify unusual values that might need further investigation.
+
+After that, I'll calculate annual and seasonal statistics and start comparing temperature trends across locations.
+
+***Next steps***
+
+Validate the full dataset and investigate suspicious values.
+
+Explore descriptive statistics for each location.
+
+Calculate annual temperature averages and warming trends.
+
+Compare actual and apparent temperatures.
+
+Study temperature extremes, humidity and sunshine patterns.
+
+Create visualizations and interpret the results.
+
+Project status: Historical data collection completed; data exploration in progress.
 
 ### Project status
 
