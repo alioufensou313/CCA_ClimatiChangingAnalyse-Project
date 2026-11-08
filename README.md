@@ -53,7 +53,7 @@ Data sources:
 - [x] Retrieve larger historical weather data
 - [x] Convert API response into a Pandas DataFrame
 - [x] Select cities and long-term analysis period
-- [ ] Collect the full dataset
+- [x] Collect the full dataset
 - [ ] Clean and analyze the data
 - [ ] Create visualizations
 - [ ] Develop Streamlit application
@@ -70,11 +70,14 @@ I then expanded the requested period to 1986–2025. The full request was too la
 
 The current challenge is handling the API's hourly request limit and making downloads resumable. The complete forty-year dataset has not yet been finalized.
 
-4.Current progress — November 2026
+4.Current progress __ November 2026
 The data collection stage is now complete!
 After successfully testing the API with seven days of data for ten locations, I expanded the period to 1986–2025. My first attempt failed because the API couldn't handle the whole request at once.
 I solved this by dividing the data into five-year periods for each location, giving me 80 smaller requests. I also encountered minute and hourly API limits, so I added delays between requests.
 After several attempts, I managed to download and combine the complete dataset.
+
+5.Current progress __ November 2026
+
 
 ***Final dataset***
 
@@ -106,25 +109,82 @@ I plan to check whether the temperature, humidity and sunshine measurements are 
 
 After that, I'll calculate annual and seasonal statistics and start comparing temperature trends across locations.
 
-***Next steps***
 
-Validate the full dataset and investigate suspicious values.
+# Data Exploration and Quality Checks
 
-Explore descriptive statistics for each location.
+A separate Python script, data_exploration.py, was created to load and analyse the saved CSV dataset using Pandas.
 
-Calculate annual temperature averages and warming trends.
+The first stage included:
 
-Compare actual and apparent temperatures.
+Checking the dataset dimensions and data types.
 
-Study temperature extremes, humidity and sunshine patterns.
+Displaying the first records and descriptive statistics.
 
-Create visualizations and interpret the results.
+Checking missing values and duplicate city-date records.
 
-Project status: Historical data collection completed; data exploration in progress.
+Checking the consistency of minimum, mean and maximum temperatures.
+
+Checking humidity and sunshine-hour values.
+
+Verifying date coverage for every location.
+
+The initial checks found no missing values, duplicate city-date records or invalid values in the checks performed.
+
+Data Preparation and Additional Variables
+
+Two additional variables were created:
+
+sunshine_hours: sunshine duration converted from seconds into hours.
+
+feels_like_difference: apparent temperature minus mean air temperature.
+
+The year was also extracted from each date to support annual analysis.
+
+Statistical Analysis
+
+#### City-Level Statistics
+
+Daily records were grouped by climate group and city to calculate average temperature, maximum and minimum daily temperature averages, apparent temperature, relative humidity, sunshine hours and temperature standard deviation.
+
+#### Annual Statistics
+
+Daily records were grouped by city and year to calculate annual averages.
+
+This produced 400 annual records (10 locations × 40 years).
+
+Annual Temperature Trends
+
+Linear regression was used to estimate:
+
+Temperature trend per decade.
+
+Estimated temperature change between 1986 and 2025.
+
+R-squared, indicating how well the fitted linear trend represents the annual temperature data.
+
+Annual Temperature Anomalies
+
+The period 1986–2005 was selected as the reference period.
+
+For each city, its average annual temperature over this baseline period was calculated. The annual temperature anomaly was then calculated for every year from 1986 to 2025 by subtracting the city's baseline average from that year's average temperature.
+
+#### Current Progress
+
+Historical data collection completed.
+
+Dataset loaded and explored using Pandas.
+
+Initial data quality checks completed.
+
+City-level and annual statistics calculated.
+
+Linear temperature trends estimated.
+
+Annual temperature anomalies calculated.
 
 ### Project status
 
-**In progress — data collection and validation.**
+**In progress — data cleaning and calculations.**
 
 ### How to Run
 

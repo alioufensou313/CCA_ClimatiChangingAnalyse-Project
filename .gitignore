@@ -66,3 +66,12 @@ weather 1986-2025.csv
 data/raw/
 data/processed/
 #============================
+
+# Python
+*.py[cod]
+
+# IDE
+.vscode/
+
+# Generated analysis results
+outputs/
