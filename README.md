@@ -182,9 +182,23 @@ Linear temperature trends estimated.
 
 Annual temperature anomalies calculated.
 
+## First Visualization
+
+I started the visualization stage using Matplotlib.
+
+For my first test, I selected Milan and created a graph showing its annual mean temperature between 1986 and 2025.
+
+The graph contains two lines:
+- The annual mean temperature, showing how temperatures changed from one year to another.
+- A linear trend line, showing the general temperature tendency over the 40-year period.
+
+The graph uses the annual statistics that I previously calculated with Pandas. This means I can create visualizations without downloading the historical data again.
+
+My next step is to make the visualization work for all ten locations.
+
 ### Project status
 
-**In progress — data cleaning and calculations.**
+**In progress — First visualisation.**
 
 ### How to Run
 

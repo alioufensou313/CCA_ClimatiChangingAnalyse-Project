@@ -193,3 +193,11 @@ I noticed that Excel initially displayed the CSV values together in one column b
 My next step is to create a separate Python file for data exploration. I want to keep the API download code separate from the analysis code so that I don't need to download the dataset again whenever I want to test something.
 
 For now, I plan to check the values, understand their distributions and calculate descriptive statistics before moving on to graphs and long-term climate comparisons.
+
+### First Temperature Visualization
+
+I created `visualizations.py` and tested my first graph using Milan.
+
+I used Matplotlib to display the annual mean temperature from 1986 to 2025 and NumPy to calculate the linear trend.
+
+The graph worked successfully. I will now improve the script so that I can use the same code for all ten locations instead of creating a separate graph for each city.
