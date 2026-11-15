@@ -212,7 +212,33 @@ To run the visualization:
 
 ```bash
 python temperature_visualizations.py
-```
+
+### Temperature Anomaly Visualizations
+
+After creating the annual temperature trend graphs, I continued with temperature anomalies to better understand how temperatures have changed over time.
+
+I created `anomaly_visualizations.py`, which uses the annual temperature anomalies previously calculated in `DataExploration.py`.
+
+The anomalies are calculated relative to the **1986–2005 baseline period**. A positive anomaly means that the year was warmer than the reference average, while a negative anomaly means it was colder.
+
+I also introduced the five Köppen–Geiger climate groups to organize the ten selected locations:
+
+| Group | Climate | Locations |
+|---|---|---|
+| A | Tropical | Kisangani, Darwin |
+| B | Dry | Aswan, Ulaanbaatar |
+| C | Temperate | Tunis, Milan |
+| D | Continental | Moscow, Yellowknife |
+| E | Polar | Longyearbyen, South Pole |
+
+The script first asks the user to select a climate group and then displays its two locations. After choosing a location, it generates an annual temperature anomaly graph with a horizontal zero line representing the baseline average.
+
+I tested the visualization using Milan and Longyearbyen, and both graphs worked successfully.
+
+To run the script:
+
+`python anomaly_visualizations.py`
+
 
 ### Project status
 

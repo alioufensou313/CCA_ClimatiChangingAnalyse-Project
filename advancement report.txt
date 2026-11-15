@@ -215,4 +215,22 @@ I tested the new script successfully. The graph displays the annual mean tempera
 
 I also created a Git branch called `feature/visualizations` to develop the visualizations without changing the main branch.
 
-**Next step:** Create temperature anomaly graphs.
+### Task 2 — Temperature Anomalies and Climate Groups
+
+I created a new script called `anomaly_visualizations.py` to visualize annual temperature anomalies from 1986 to 2025.
+
+Instead of displaying all ten locations together, I organized them into the five Köppen–Geiger climate groups, with two locations in each group.
+
+The user can select a group and then choose one of its locations to display the anomaly graph.
+
+The script uses the CSV file generated during data exploration, so no additional API requests are needed.
+
+I tested the script with Milan (Group C) and Longyearbyen (Group E). Both visualizations worked correctly.
+
+**What I learned:**
+- How to organize locations using a Python dictionary.
+- How to filter a Pandas DataFrame by climate group and location.
+- How to use a zero reference line to interpret temperature anomalies.
+- How to reuse previously processed data instead of downloading it again.
+
+
