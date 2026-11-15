@@ -201,3 +201,18 @@ I created `visualizations.py` and tested my first graph using Milan.
 I used Matplotlib to display the annual mean temperature from 1986 to 2025 and NumPy to calculate the linear trend.
 
 The graph worked successfully. I will now improve the script so that I can use the same code for all ten locations instead of creating a separate graph for each city.
+
+
+### Task 1 — Temperature Trend Visualizations
+
+I started by creating a graph for Milan using Matplotlib.
+
+After confirming that the graph worked, I created a second script, `temperature_visualizations.py`, which allows me to select any of the ten locations.
+
+I used a function to reuse the same visualization code instead of writing separate code for each location.
+
+I tested the new script successfully. The graph displays the annual mean temperature from 1986 to 2025 and the linear temperature trend.
+
+I also created a Git branch called `feature/visualizations` to develop the visualizations without changing the main branch.
+
+**Next step:** Create temperature anomaly graphs.

@@ -54,8 +54,8 @@ Data sources:
 - [x] Convert API response into a Pandas DataFrame
 - [x] Select cities and long-term analysis period
 - [x] Collect the full dataset
-- [ ] Clean and analyze the data
-- [ ] Create visualizations
+- [x] Clean and analyze the data
+- [%] Create visualizations
 - [ ] Develop Streamlit application
 
 
@@ -195,6 +195,24 @@ The graph contains two lines:
 The graph uses the annual statistics that I previously calculated with Pandas. This means I can create visualizations without downloading the historical data again.
 
 My next step is to make the visualization work for all ten locations.
+
+### Temperature Trend Visualizations
+
+I first created a graph showing Milan's annual mean temperature from 1986 to 2025 using Matplotlib.
+
+After testing it, I created a new script called `temperature_visualizations.py` to make the visualization reusable for all ten locations.
+
+The script asks the user to enter a city name and then displays its annual mean temperature together with a linear trend line.
+
+I used a Python function to avoid repeating the same plotting code for each city.
+
+The script reads the annual statistics saved during data exploration, so I don't need to download the historical data again.
+
+To run the visualization:
+
+```bash
+python temperature_visualizations.py
+```
 
 ### Project status
 
