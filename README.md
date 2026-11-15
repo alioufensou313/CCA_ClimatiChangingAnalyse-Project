@@ -242,7 +242,7 @@ To run the script:
 
 ### Project status
 
-**In progress — First visualisation.**
+**In progress — Second visualisation.**
 
 ### How to Run
 
