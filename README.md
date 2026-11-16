@@ -196,7 +196,7 @@ The graph uses the annual statistics that I previously calculated with Pandas. T
 
 My next step is to make the visualization work for all ten locations.
 
-### Temperature Trend Visualizations
+## Temperature Trend Visualizations
 
 I first created a graph showing Milan's annual mean temperature from 1986 to 2025 using Matplotlib.
 
@@ -213,7 +213,7 @@ To run the visualization:
 ```bash
 python temperature_visualizations.py
 
-### Temperature Anomaly Visualizations
+## Temperature Anomaly Visualizations
 
 After creating the annual temperature trend graphs, I continued with temperature anomalies to better understand how temperatures have changed over time.
 
@@ -238,6 +238,30 @@ I tested the visualization using Milan and Longyearbyen, and both graphs worked 
 To run the script:
 
 `python anomaly_visualizations.py`
+
+
+## Climate Group Temperature Comparisons
+
+After creating the temperature trend and anomaly visualizations, I wanted to compare the two locations selected within each Köppen–Geiger climate group.
+
+I created a new script called `climate_comparison.py`. It reads the temperature trends previously calculated in `DataExploration.py` from `outputs/temperature_trends.csv`.
+
+The script allows the user to select one of the five climate groups (A–E) and displays a bar chart comparing the estimated temperature trend of its two locations.
+
+The warming rates are expressed in **°C per decade** and calculated using linear regression on annual mean temperatures from 1986 to 2025.
+
+For example, in Group D (Continental):
+- Moscow: approximately +0.589°C per decade.
+- Yellowknife: approximately +0.306°C per decade.
+
+Although both locations belong to the same broad climate group, their estimated warming rates are different.
+
+The graph includes exact values above the bars, a zero reference line, and the study period.
+
+To run the comparison:
+
+`python climate_comparison.py`
+
 
 
 ### Project status

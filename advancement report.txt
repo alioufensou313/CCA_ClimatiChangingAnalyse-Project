@@ -234,3 +234,24 @@ I tested the script with Milan (Group C) and Longyearbyen (Group E). Both visual
 - How to reuse previously processed data instead of downloading it again.
 
 
+### Task 3 — Comparing Locations Within Climate Groups
+
+I created `climate_comparison.py` to compare the warming rates of two locations belonging to the same Köppen–Geiger climate group.
+
+The script reads the temperature trend results already calculated during data exploration. I used a dictionary to organize the ten locations into five groups and Pandas to select the corresponding data.
+
+I used Matplotlib to create a bar chart showing the estimated temperature trend in °C per decade.
+
+During testing, I noticed that the first graphs were not specific enough, so I improved them by adding the exact values above the bars and clarifying the title and axis labels.
+
+I also corrected an indentation error that appeared while modifying the plotting code.
+
+I tested the comparison graphs successfully for all five climate groups.
+
+**What I learned:**
+- How to filter a DataFrame using `.isin()`.
+- How to create bar charts with Matplotlib.
+- How to display numerical values above bars.
+- How linear regression slopes can be expressed as temperature change per decade.
+- Why two locations within the same broad climate group may have different warming trends.
+
