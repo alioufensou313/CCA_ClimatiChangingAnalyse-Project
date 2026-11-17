@@ -262,6 +262,22 @@ To run the comparison:
 
 `python climate_comparison.py`
 
+## Interactive Dashboard — Streamlit
+
+After creating the temperature visualizations, I started building an interactive dashboard using Streamlit.
+
+I created `app.py`, which provides a simple web interface for exploring the ten locations.
+
+The dashboard currently includes:
+- A title explaining the project and study period (1986–2025).
+- A dropdown menu to select one of the five Köppen–Geiger climate groups.
+- A second dropdown menu showing the two locations belonging to the selected group.
+
+I tested the application locally and verified that the location selection works.
+
+To launch the dashboard:
+
+`python -m streamlit run app.py`
 
 
 ### Project status

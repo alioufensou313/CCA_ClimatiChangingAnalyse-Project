@@ -255,3 +255,14 @@ I tested the comparison graphs successfully for all five climate groups.
 - How linear regression slopes can be expressed as temperature change per decade.
 - Why two locations within the same broad climate group may have different warming trends.
 
+### Task 4 — First Streamlit Dashboard
+
+I installed Streamlit and created `app.py` to start developing the interactive dashboard.
+
+I added two selection menus: one for the climate group and another for the location.
+
+At first, I tried running the file using the VS Code debugger, but Streamlit displayed warnings. I learned that Streamlit applications must be launched using `streamlit run`.
+
+After correcting this, the dashboard opened successfully in my browser.
+
+**Next task:** Display our existing visualizations inside Streamlit.
