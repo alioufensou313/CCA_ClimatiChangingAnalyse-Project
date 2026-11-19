@@ -1,268 +1,338 @@
-On a coché les variables + les pays ..etc
-1/ on veut installer requests pandas / python -m pip install requests pandas
-2/ça n'a pas marché pour des raisons donc : py -m pip install requests pandas
-3/ le shell n'accepte pas pip donc => python -m pip install requests requests-cache retry-requests numpy pandas openmeteo-requests
+# Weather Report Project — Advancement Report
 
+## 1. How I Started
 
-Maintenant que vos outils sont prêts, nous allons écrire le code pour transformer la réponse de l'API (qui arrive sous forme de dictionnaire JSON) en un tableau propre avec des lignes et des colonnes : un DataFrame Pandas.
-Ouvrez votre fichier test_api.py dans VS Code, effacez tout ce qu'il y a dedans, et collez ce code à la place.
+At the beginning of this project, I was trying to understand how to use an API with Python.
 
-On a importer les biblioteques :
+I chose the Weather Report project because I was interested in studying climate change using real historical weather data.
 
-import openmeteo_requests : permet de communiquer avec l'API Open-Meteo.
-import pandas as pd  : permet de manipuler les données sous forme de tableaux.
-import requests_cache : conserve les réponses pour éviter de les télécharger plusieurs fois.
-from retry_requests import retry : permet de réessayer une requête en cas d'erreur temporaire.
+I started with the Open-Meteo Historical Weather API and tested three locations: Milan, Tunis and a general location in France.
 
-et le plan maintenant est comme suit :
-On doit etablir la connexion avec l'api (milan, un seul parametre, une duree courte => to test first!)
+My first objective was simple: connect to the API, request a few days of weather data and organize the results in a Pandas DataFrame.
 
+I initially had some difficulties installing Python libraries. Some `pip` commands did not work in my terminal, so I tried different commands until I managed to install the packages.
 
-j'ai reduis les parametres puis chngé hourly par daily car hourly consomme plus de data !! et je veux le minimum maintenant ! 
+I also learned the purpose of the main libraries:
 
- 
+- `openmeteo_requests`: Connecting to the Open-Meteo API.
+- `pandas`: Organizing and analyzing data.
+- `requests_cache`: Caching API responses.
+- `retry_requests`: Retrying requests after temporary errors.
 
-fichier requirements doit contenir (requests
-requests
-pandas
-numpy
-requests-cache
-retry-requests
-openmeteo-requests 
+After correcting some mistakes in my code, I successfully retrieved my first weather data.
 
+This was my first important step because I started understanding how data moves from an API into a Python program.
 
+---
 
-https://www.amazon.it/-/en/YAMAMOTO-Nutrition-L-Carnitine-Carnitine-Supplement/dp/B074P5XJFK/ref=zg_bs_g_6102393031_d_sccl_1/524-6178429-5174662?psc=1
+## 2. Improving My Project Idea
 
+After the first tests, I realized that comparing a few randomly selected locations would not make the analysis very meaningful.
 
-Progress — Weather Variables
+I wanted to organize my locations using a clear method.
 
-- Added apparent temperature and relative humidity to the weather analysis.
-- Extended the dataset to study the relationship between actual temperature, apparent temperature, and humidity.
-- Updated the API request and DataFrame structure.
+I discovered the Köppen–Geiger climate classification, which divides climates into five major groups.
 
-*maintenant je veux ajouter d'autres variables pour que l'analalyse soit pertinante : 
-j'ajoute la vitesse direction du vent et la pression du surface pour faire une veritable analyse dynamique du climat!! 
+I decided to select two locations from each group:
 
-apres ça je pense à ajouter plus de pays : je vais les regrouper par zones pour ne pas élargir le tas des données en vide !! je ne veux pas créer une= jeu debile qui compare des pays random et interprete 
-je vais alors filtrer ces pays puis je vais les extracter puis je vais faire la moyenne de leurs temperatures pour avoir une temperature moyenne de cette zone predifine du contienant par exp !! puis j'utilise cette teperature moyenne poour faire une comparaison avec le vent par exp 
-et sa direction !! mais nonn des que j'aurai la temperature moyenne d'une zone predefinie il faut trouver une variable à relier avec !!
-
-on va definier nos relations de variables avent tout !! donc on a :
-## latitude + longitude = fixent le cadre géographique et la quantité d'energie solaire reçue 
-(la latitude determine votre zone climatique!!
-
-##Pression de surface = est le moteur du climat !!
-les differneces de pression entre les deux régions créent le vent
-L'air touhours se déplace des hautes pressions/anticyclones vers les basses pressions/dépressions)
-
-## Humidité + température moyenne = ensemble determinent la temperature apparente (le ressenti thermique 
-crucial pour mesurer l'impact réel du changement climatique sur le vivant)
-
-les variables à ajouter absolument sont : 
-##### I need to use what we've learned in class 
-=> (join ,class, str, )
-
-
-# Weather Report Project — Progress Update
-
-## How i started
-
-At the beginning, I was just trying to understand how to use the Open-Meteo Historical Weather API with Python. I didn't have much experience working with APIs or processing weather data, so I started with a simple test using three locations: Milan, Tunis, and a general location in France.
-
-My first goal was to check whether I could connect to the API, request weather data, and turn the results into something I could work with using Pandas.
-
-I managed to retrieve seven days of data and create my first DataFrame. This helped me understand the difference between requesting data from an API and actually organizing it for analysis.
-
-## Changing the project idea
-
-After the first tests, I realized that comparing only three locations was quite limited. I wanted to study climate change in different environments, not just compare a few cities.
-
-I came across the Köppen–Geiger climate classification and decided to use it to organize the locations in the project.
-
-The classification divides climates into five major groups:
-
-- A — Tropical
-- B — Arid
-- C — Temperate
-- D — Continental
-- E — Polar
-
-Instead of choosing locations randomly, I decided to select two locations from each group. This gave me ten locations in total.
-
-The final selection was:
-
-| Group | First location | Second location |
+| Group | Climate | Locations |
 |---|---|---|
-| A | Kisangani | Darwin |
-| B | Aswan | Ulaanbaatar |
-| C | Tunis | Milan |
-| D | Moscow | Yellowknife |
-| E | Longyearbyen | South Pole |
+| A | Tropical | Kisangani, Darwin |
+| B | Dry | Aswan, Ulaanbaatar |
+| C | Temperate | Tunis, Milan |
+| D | Continental | Moscow, Yellowknife |
+| E | Polar | Longyearbyen, South Pole |
 
-The idea is to compare how temperatures have changed in different climates over forty years, from 1986 to 2025. I also want to compare the two locations within each climate group.
+This gave me ten locations to study between 1986 and 2025.
 
-The South Pole is a research location rather than a town, and I will need to be careful when interpreting its modeled weather data.
+I tried to choose locations with different geographical characteristics, even within the same climate group.
 
-## Building the Python code
+My main question became: **Do locations belonging to the same broad climate group experience similar temperature changes?**
 
-At first, I entered the latitude and longitude values directly into the API parameters. This worked for three locations, but it wasn't practical for ten.
+I also noted that the South Pole is a research location rather than a city, so its data should be interpreted carefully.
 
-I changed the structure by creating a list of dictionaries. Each dictionary contains a location's name, latitude, longitude and climate group.
+---
 
-I then used a Python loop to extract the coordinates automatically and request the weather data.
+## 3. Organizing the Python Code
 
-Another important step was learning how to use `for`, `zip()`, `append()` and `pd.concat()` to process the API responses and combine the results into one DataFrame.
+At first, I entered the latitude and longitude values directly into the API parameters.
 
-## Choosing the weather variables
+This worked for a few locations, but it became difficult to manage when I expanded the project.
 
-I started with three variables: mean temperature, apparent temperature and relative humidity.
+I changed the code by creating a list of dictionaries containing each location's name, coordinates and climate group.
 
-Later, I decided to expand the analysis to six daily variables:
+Then I used a loop to request the data for the selected locations.
 
-1. Mean temperature
-2. Maximum temperature
-3. Minimum temperature
-4. Apparent temperature
-5. Relative humidity
-6. Sunshine duration
+During this step, I practiced using `for`, `zip()`, `append()` and `pd.concat()`.
 
-I wanted to keep apparent temperature because I am interested in the difference between actual air temperature and how hot or cold conditions feel in different environments.
+I also made several mistakes with brackets, commas and the structure of the API response. Correcting these errors helped me understand how the code was organized.
 
-I also added two calculated columns: sunshine duration converted into hours, and the difference between apparent and actual mean temperature.
+One important error happened when I requested three weather variables from the API but tried to process six variables in Python.
 
-I decided to use daily rather than hourly observations because daily data is sufficient for the main research questions and is easier to manage over forty years.
+I learned that the requested variables must match the data I extract from the API response.
 
-## Problems I encountered
+---
 
-The first problems were related to Python and the structure of my code. I had some syntax errors, including misplaced brackets and braces. I also made mistakes when changing the API parameters.
+## 4. Choosing the Weather Variables
 
-At one point, I was requesting only three variables from Open-Meteo while trying to read six variables in Python. This caused an error. I learned that the order and number of variables requested from the API must match the variables processed in the DataFrame.
+I first worked with mean temperature, apparent temperature and relative humidity.
 
-I also had to correct the way dates were represented. Some daily dates appeared as the previous day because of the difference between local time and UTC.
+Later, I expanded the dataset to six daily weather measurements:
 
-After these corrections, the seven-day test worked successfully for all ten locations.
+1. Mean temperature.
+2. Maximum temperature.
+3. Minimum temperature.
+4. Apparent temperature.
+5. Relative humidity.
+6. Sunshine duration.
 
-The result was a DataFrame with 70 rows and 11 columns. The checks showed no missing values or duplicate city-date combinations, and every climate group contained exactly two locations.
+I also prepared two calculated variables: sunshine duration converted into hours and the difference between apparent and measured air temperature.
 
-## Expanding to forty years
+At one point, I considered adding wind speed, wind direction and surface pressure to study more relationships between weather variables.
 
-Once the short test worked, I changed the dates to cover January 1986 through December 2025.
+However, I decided to keep the main project focused on temperature evolution, climate comparisons and a smaller exploratory analysis of humidity.
 
-The first problem was that Open-Meteo rejected the request because I was asking for too much data at once: ten locations, six variables and forty years.
+A complete analysis of wind, pressure and atmospheric conditions would require more detailed comparisons.
 
-To solve this, I divided the forty-year period into eight five-year batches for each location. This meant making 80 smaller API requests instead of one large request.
+I also changed my requests from hourly to daily data because daily observations were more suitable for studying forty years of weather without creating an unnecessarily large dataset.
 
-The smaller requests worked, but I then encountered API rate limits. First, I received a message saying that the minute limit had been exceeded.
+---
 
-I added `time.sleep(10)` to leave a ten-second delay between requests. This helped slow down the download process, but it didn't prevent the hourly limit from being reached.
+## 5. Testing the Ten Locations
 
-During the latest run, the program processed the requests for the first eight locations and reached the first period for Longyearbyen before stopping.
+Before downloading the complete dataset, I tested the API using seven days of weather data for all ten locations.
 
-## Current problem and next steps
+I encountered some problems with the structure of the responses and the dates.
 
-The main problem now is that the code keeps the downloaded batches in memory and only combines them at the end. If the program crashes because of an API limit, I risk losing the progress from that execution.
+For example, some dates appeared as the previous day because of differences between local time and UTC.
 
-My next step is to improve the download process so that each completed batch is saved separately. This will allow the program to skip already downloaded batches when I restart it.
+After making corrections, the test finally worked.
 
-After collecting the complete dataset, I plan to check missing values, verify the dates, clean the data and start analyzing annual temperature trends.
+I obtained a DataFrame with **70 rows and 11 columns**.
 
-The main objective is still to understand how temperatures have evolved across different climate environments over forty years, rather than just producing graphs without a clear research question.
+I checked the results and found no missing values or duplicate city-date combinations.
 
+This gave me enough confidence to expand the collection period.
 
-## November 2026 — Historical dataset successfully collected
+---
 
-After several attempts, I finally managed to download the complete forty-year dataset.
+## 6. Collecting Forty Years of Weather Data
 
-The main difficulty was the Open-Meteo API request limits. At first, I tried downloading the data for all ten locations and forty years in one request, but it was too large.
+After the short tests, I changed the dates to cover January 1986 through December 2025.
 
-I then divided the period into eight five-year batches per location, making 80 requests in total. This solved the request-size problem, but I encountered another issue: the API limited how many requests I could make per minute and per hour.
+My first attempt was to request the complete dataset, but the request was too large.
 
-I added a ten-second delay between requests and tried again. Some executions still stopped because of the hourly limit, but eventually the complete download worked.
+To solve this problem, I divided the forty-year period into eight smaller periods of five years for each location.
 
-I combined all the batches into one Pandas DataFrame and saved it as a CSV file.
+With ten locations, this meant making **80 API requests**.
 
-The final dataset contains 146,100 daily observations, covering January 1, 1986 to December 31, 2025, for all ten selected locations.
+The smaller requests worked better, but I encountered another problem: the API rate limits.
 
-I also checked the structure of the dataset. Each location has 14,610 rows, there are no missing values, and there are no duplicate combinations of city and date.
+At first, I received errors about exceeding the number of requests allowed within a short period.
 
-The CSV has 11 columns, including the six weather measurements, location information and two additional calculated variables: sunshine hours and the difference between apparent and actual temperature.
+I introduced a delay using `time.sleep(10)` to reduce the request frequency.
 
-I noticed that Excel initially displayed the CSV values together in one column because of the separator settings. This was a display/import issue rather than a problem with the Python data.
+This improved the downloading process, although some executions still stopped because of the API's hourly limit.
 
-My next step is to create a separate Python file for data exploration. I want to keep the API download code separate from the analysis code so that I don't need to download the dataset again whenever I want to test something.
+I also considered saving each completed batch separately so that a failed execution would not require restarting the entire download.
 
-For now, I plan to check the values, understand their distributions and calculate descriptive statistics before moving on to graphs and long-term climate comparisons.
+After several attempts, I managed to collect the complete dataset.
 
-### First Temperature Visualization
+### Final Download Results
 
-I created `visualizations.py` and tested my first graph using Milan.
+The final dataset contains:
 
-I used Matplotlib to display the annual mean temperature from 1986 to 2025 and NumPy to calculate the linear trend.
+- 10 locations.
+- 40 years of daily weather data (1986–2025).
+- 146,100 observations.
+- 11 columns.
+- 14,610 daily observations per location.
 
-The graph worked successfully. I will now improve the script so that I can use the same code for all ten locations instead of creating a separate graph for each city.
+I combined the downloaded data into one Pandas DataFrame and saved it as `weather_1986_2025.csv`.
 
+During the initial checks, I found no missing values or duplicate city-date combinations.
 
-### Task 1 — Temperature Trend Visualizations
+I also noticed that Excel sometimes displayed the CSV values in one column because of separator settings. I learned that this was a CSV import issue rather than a problem with the Python data.
 
-I started by creating a graph for Milan using Matplotlib.
+**What I learned:** Working with historical data requires more than making a successful API request. I also needed to manage request sizes, rate limits, errors and data organization.
 
-After confirming that the graph worked, I created a second script, `temperature_visualizations.py`, which allows me to select any of the ten locations.
+---
 
-I used a function to reuse the same visualization code instead of writing separate code for each location.
+## 7. Starting Data Exploration
 
-I tested the new script successfully. The graph displays the annual mean temperature from 1986 to 2025 and the linear temperature trend.
+Once the complete dataset was saved, I decided to separate data collection from data analysis.
 
-I also created a Git branch called `feature/visualizations` to develop the visualizations without changing the main branch.
+I kept the downloading code in `test_api.py` and created `DataExploration.py` for processing the saved CSV.
 
-### Task 2 — Temperature Anomalies and Climate Groups
+This was useful because I could test calculations without downloading forty years of data again.
 
-I created a new script called `anomaly_visualizations.py` to visualize annual temperature anomalies from 1986 to 2025.
+I started by checking the dataset dimensions, data types and descriptive statistics.
 
-Instead of displaying all ten locations together, I organized them into the five Köppen–Geiger climate groups, with two locations in each group.
+I also checked missing values, duplicates, temperature consistency, humidity values, sunshine duration and date coverage.
 
-The user can select a group and then choose one of its locations to display the anomaly graph.
+After verifying the data, I calculated general statistics for each location and annual statistics for each year.
 
-The script uses the CSV file generated during data exploration, so no additional API requests are needed.
+The annual aggregation produced **400 records**, representing ten locations over forty years.
 
-I tested the script with Milan (Group C) and Longyearbyen (Group E). Both visualizations worked correctly.
+I then calculated linear temperature trends in °C per decade and annual temperature anomalies using 1986–2005 as the reference period.
 
-**What I learned:**
-- How to organize locations using a Python dictionary.
-- How to filter a Pandas DataFrame by climate group and location.
-- How to use a zero reference line to interpret temperature anomalies.
-- How to reuse previously processed data instead of downloading it again.
+These results were saved in separate CSV files for the visualization stage.
 
+---
 
-### Task 3 — Comparing Locations Within Climate Groups
+## 8. My First Temperature Graph
 
-I created `climate_comparison.py` to compare the warming rates of two locations belonging to the same Köppen–Geiger climate group.
+I started the visualization stage using Matplotlib.
 
-The script reads the temperature trend results already calculated during data exploration. I used a dictionary to organize the ten locations into five groups and Pandas to select the corresponding data.
+My first graph was for Milan, showing its annual mean temperature from 1986 to 2025.
 
-I used Matplotlib to create a bar chart showing the estimated temperature trend in °C per decade.
+I used NumPy to calculate a linear trend and displayed it alongside the annual temperature values.
 
-During testing, I noticed that the first graphs were not specific enough, so I improved them by adding the exact values above the bars and clarifying the title and axis labels.
+The graph worked, and I could see how the annual temperatures fluctuated around the general trend.
 
-I also corrected an indentation error that appeared while modifying the plotting code.
+After this first test, I wanted to make the code reusable for all ten locations rather than creating a separate graph for every city.
 
-I tested the comparison graphs successfully for all five climate groups.
+I created `temperature_visualizations.py` and used a function to display the selected location's temperature trend.
 
-**What I learned:**
-- How to filter a DataFrame using `.isin()`.
-- How to create bar charts with Matplotlib.
-- How to display numerical values above bars.
-- How linear regression slopes can be expressed as temperature change per decade.
-- Why two locations within the same broad climate group may have different warming trends.
+I also started working on a Git branch named `feature/visualizations` to develop this part without directly changing the main branch.
 
-### Task 4 — First Streamlit Dashboard
+---
 
-I installed Streamlit and created `app.py` to start developing the interactive dashboard.
+## 9. Temperature Anomalies
 
-I added two selection menus: one for the climate group and another for the location.
+After the temperature trend graphs, I created `anomaly_visualizations.py`.
 
-At first, I tried running the file using the VS Code debugger, but Streamlit displayed warnings. I learned that Streamlit applications must be launched using `streamlit run`.
+This script used the annual temperature anomalies already calculated during data exploration.
 
-After correcting this, the dashboard opened successfully in my browser.
+I organized the locations by climate group so that I could first select a group and then choose one of its two locations.
 
-**Next task:** Display our existing visualizations inside Streamlit.
+The graph included a horizontal zero line representing the reference average.
+
+I tested the script with Milan and Longyearbyen, and both graphs worked.
+
+During this step, I learned how to filter a DataFrame and how temperature anomalies help compare changes in locations with very different average temperatures.
+
+---
+
+## 10. Comparing Locations Within Climate Groups
+
+Next, I created `climate_comparison.py`.
+
+The objective was to compare the estimated warming rates of the two selected locations within each climate group.
+
+I used the temperature trend results and Matplotlib to create bar charts.
+
+During testing, I noticed that the first version of the graphs was not specific enough. It was difficult to read the exact values.
+
+I improved the graphs by adding numerical labels above the bars and clearer titles.
+
+I also encountered an indentation error while changing the plotting code. After correcting it, the script worked for all five climate groups.
+
+This analysis helped me notice that locations belonging to the same broad climate group can have different estimated warming rates.
+
+For example, Milan and Tunis belong to Group C, but Milan shows a stronger warming trend.
+
+---
+
+## 11. Testing Streamlit
+
+After creating the separate visualization scripts, I wanted to bring everything together in one interface.
+
+I installed Streamlit and created `app.py`.
+
+My first version included a title and two selection menus: one for the climate group and another for the location.
+
+At first, I tried running the application directly from the VS Code debugger, which produced warnings.
+
+I learned that Streamlit applications need to be launched with `streamlit run`.
+
+After using the correct command, the first interface opened successfully in my browser, and the location selection worked.
+
+However, when I started integrating the graphs, I encountered problems loading Python libraries.
+
+I investigated the errors and discovered that Windows Smart App Control was blocking some compiled components used by Pandas and PyArrow.
+
+I considered other solutions, including using a Linux environment or running Streamlit online.
+
+At this point, I reconsidered whether building a web interface was necessary for the main objectives of my project.
+
+---
+
+## 12. Moving to Jupyter Notebook
+
+Since the main goal of my project was to analyze historical weather data rather than build a web application, I decided to use Jupyter Notebook for the final presentation.
+
+I chose Google Colab because I could run the Python analysis in a browser without the library problem I encountered on Windows.
+
+I reused the processed CSV files and the calculations from my earlier scripts.
+
+The final notebook, `CC_Weather_Analysis.ipynb`, brings together:
+
+- Annual temperature trends.
+- Comparisons across the ten locations.
+- Temperature anomalies.
+- Warming-rate comparisons within climate groups.
+- An exploratory analysis of humidity and apparent temperature.
+- Interpretations and conclusions.
+
+I also grouped the graphs into five rows and two columns to make the climate comparisons easier to follow.
+
+The notebook allowed me to keep the Python code, results and explanations in one place.
+
+I found this format more practical for explaining the project step by step.
+
+---
+
+## 13. Reviewing the Results
+
+After finishing the notebook, I reviewed the graphs and improved the written interpretations.
+
+I tried to focus on what the results actually showed rather than simply describe how the graphs worked.
+
+For example, I noticed that Longyearbyen has the strongest estimated warming trend among the selected locations, while Darwin has the weakest.
+
+I also observed that locations in the same climate group do not always have similar temperature trends.
+
+For the humidity analysis, I compared average relative humidity with the difference between apparent and measured air temperature.
+
+The results made me realize that humidity alone cannot explain the differences between all ten locations.
+
+I therefore kept this section exploratory and identified wind speed, air temperature and other atmospheric conditions as possible topics for future work.
+
+I also reviewed the limitations of the study, especially the small number of selected locations and the use of linear regression to summarize long-term changes.
+
+---
+
+## 14. Final Project Organization
+
+For the final version, I decided to keep three main parts:
+
+**Data collection — `test_api.py`**
+
+This contains the API downloading process and the preparation of the original historical dataset.
+
+**Data exploration — `DataExploration.py`**
+
+This contains the data checks, annual statistics, temperature trends and anomaly calculations.
+
+**Final analysis — `CC_Weather_Analysis.ipynb`**
+
+This contains the visualizations, comparisons, interpretations and conclusions.
+
+I also organized the processed CSV files in a `data/` folder so the notebook can be executed without repeating the complete API download.
+
+The earlier visualization scripts and Streamlit application were part of my development process, but I decided to use the Jupyter Notebook for the final presentation.
+
+---
+
+## 15. What I Learned
+
+This project helped me practice several Python concepts, including lists, dictionaries, loops, functions and DataFrames.
+
+I also learned how to work with an API, manage larger datasets, handle errors, clean data and create visualizations.
+
+One of the most important lessons was that producing graphs is not enough. I also need to understand what the graphs show and recognize the limits of my conclusions.
+
+The project required several changes of approach, but these changes helped me better understand how to organize a data analysis project.
+
+My next priority is to review the Python code carefully so I can explain the collection, processing and visualization steps during the presentation.
