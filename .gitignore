@@ -1,77 +1,46 @@
-#=========================================
-#Ignore Python’s temporary internal files.
-#=========================================
-__pycache__/  
-*.pyc
-#===========================================
-#Ignore my local virtual environment folder.
-#===========================================
-.venv/        
-#======================================================
-   
-#===========================
+
+# ============================
+# Python temporary files
+# ============================
+__pycache__/
+*.py[cod]
+.venv/
+
+# ============================
 # Open-Meteo API cache
+# ============================
 .cache/
-#===========================
-
-#===========================
-# Streamlit secrets
-.streamlit/secrets.toml
-#===========================
-
-#===========================
-# Environment variables
-.env
-#===========================
-
-#===========================
-# Jupyter checkpoints
-.ipynb_checkpoints/
-#===========================
-
-#===========================
-# Operating system files
-.DS_Store
-Thumbs.db
-#===========================
-
-# Open-Meteo generated cache
-.cache.sqlite
-###########################
-weather_1986_2025.csv
-#============================
-#API cache
 .cache.*
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
-#============================
-# Streamlit local configuration
-.streamlit/secrets.toml
-#============================
-# Generated weather datasets
-weather_1986_2025.csv
-data/raw/
-data/processed/
-#============================
-# Editor and operating system
-.vscode/
-.DS_Store
-Thumbs.db
-#============================
-#============================
-#Historical weather datasets
+
+# ============================
+# Original weather datasets
+# ============================
 weather_1986_2025.csv
 weather 1986-2025.csv
 data/raw/
 data/processed/
-#============================
 
-# Python
-*.py[cod]
+# ============================
+# Generated analysis results
+# ============================
+outputs/
 
-# IDE
+# ============================
+# Jupyter Notebook
+# ============================
+.ipynb_checkpoints/
+
+# ============================
+# Local configuration
+# ============================
+.env
 .vscode/
 
-# Generated analysis results
-outputs/
+# ============================
+# Operating system files
+# ============================
+.DS_Store
+Thumbs.db
